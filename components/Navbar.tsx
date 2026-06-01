@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { useTourBooking } from "./TourBookingProvider";
 
 const navLinks = [
   { label: "Properties", href: "#properties" },
@@ -14,6 +15,7 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { open: openTourModal } = useTourBooking();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -74,7 +76,8 @@ export default function Navbar() {
           {/* CTA */}
           <div className="hidden md:flex items-center gap-3">
             <a
-              href="#contact"
+              href="#"
+              onClick={(e) => { e.preventDefault(); openTourModal(); }}
               className="group relative flex items-center gap-2 bg-brown hover:bg-brown-light text-off-white text-[11px] uppercase tracking-[0.15em] font-black px-5 py-2.5 rounded-full transition-all duration-500"
               style={{ transition: "background 0.4s cubic-bezier(0.16,1,0.3,1), transform 0.2s" }}
             >
@@ -164,8 +167,8 @@ export default function Navbar() {
                 transition={{ duration: 0.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
               >
                 <a
-                  href="#contact"
-                  onClick={() => setMenuOpen(false)}
+                  href="#"
+                  onClick={(e) => { e.preventDefault(); setMenuOpen(false); openTourModal(); }}
                   className="mt-4 inline-block bg-brown text-off-white text-[11px] uppercase tracking-[0.15em] font-black px-6 py-3 rounded-full"
                 >
                   Book a Tour
