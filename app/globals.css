@@ -3,25 +3,102 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-navy: #0A1628;
+  --color-blue: #1A3A6B;
+  --color-blue-light: #2E5FBF;
+  --color-blue-electric: #3B72E8;
+  --color-brown: #8B5E3C;
+  --color-brown-light: #C49A72;
+  --color-white: #F5F0EB;
+  --color-white-pure: #FFFFFF;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-navy);
+  color: var(--color-white);
+  font-family: var(--font-poppins), sans-serif;
+  font-weight: 700;
+  overflow-x: hidden;
+}
+
+/* Noise overlay - fixed, pointer-events-none */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-navy);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-brown);
+  border-radius: 2px;
+}
+
+/* Selection */
+::selection {
+  background: var(--color-brown);
+  color: var(--color-white);
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+
+  .heading-display {
+    font-family: var(--font-poppins), sans-serif;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    text-transform: uppercase;
+  }
+
+  .clip-diagonal {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 8% 100%);
+  }
+
+  .clip-diagonal-reverse {
+    clip-path: polygon(0 0, 92% 0, 100% 100%, 0 100%);
+  }
+}
+
+/* Animated underline */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-brown-light);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-underline:hover::after {
+  width: 100%;
 }
