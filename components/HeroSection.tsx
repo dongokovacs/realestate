@@ -39,10 +39,12 @@ export default function HeroSection() {
   return (
     <section
       ref={containerRef}
+      aria-label="Főoldal bemutató"
       className="relative min-h-[100dvh] flex flex-col overflow-hidden bg-navy"
     >
       {/* Background Grid Lines */}
       <div
+        aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage: "linear-gradient(rgba(245,240,235,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(245,240,235,0.03) 1px, transparent 1px)",
@@ -50,8 +52,9 @@ export default function HeroSection() {
         }}
       />
 
-      {/* Diagonal Split — right side image */}
+      {/* Diagonal Split — right side image (decorative) */}
       <motion.div
+        aria-hidden="true"
         className="absolute top-0 right-0 w-[55%] md:w-[45%] h-full"
         style={{ y: imageY }}
       >
@@ -94,7 +97,7 @@ export default function HeroSection() {
           {/* Eyebrow */}
           <motion.div variants={fadeUp} className="mb-8">
             <span className="inline-flex items-center gap-2 rounded-full border border-brown/30 bg-brown/10 px-4 py-1.5 text-[10px] uppercase tracking-[0.22em] text-brown-light font-black">
-              <span className="w-1 h-1 rounded-full bg-brown-light animate-pulse" />
+              <span className="w-1 h-1 rounded-full bg-brown-light animate-pulse" aria-hidden="true" />
               Luxury Real Estate Since 2010
             </span>
           </motion.div>
@@ -159,8 +162,9 @@ export default function HeroSection() {
           </motion.div>
         </motion.div>
 
-        {/* Scroll Indicator */}
+        {/* Scroll Indicator — decorative */}
         <motion.div
+          aria-hidden="true"
           className="flex items-center gap-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -186,24 +190,24 @@ export default function HeroSection() {
         transition={{ delay: 1.0, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="flex items-stretch divide-x divide-off-white/[0.06]">
+          <dl className="flex items-stretch divide-x divide-off-white/[0.06]">
             {stats.map((stat) => (
               <div
                 key={stat.value}
                 className="flex-1 py-5 md:py-6 px-4 md:px-8 first:pl-0 last:pr-0"
               >
-                <div
+                <dd
                   className="text-2xl md:text-3xl font-black text-blue-electric leading-none"
                   style={{ fontFamily: "var(--font-poppins)", letterSpacing: "-0.03em" }}
                 >
                   {stat.value}
-                </div>
-                <div className="mt-1 text-[10px] uppercase tracking-[0.15em] text-off-white/40 font-bold">
+                </dd>
+                <dt className="mt-1 text-[10px] uppercase tracking-[0.15em] text-off-white/40 font-bold">
                   {stat.label}
-                </div>
+                </dt>
               </div>
             ))}
-          </div>
+          </dl>
         </div>
       </motion.div>
     </section>

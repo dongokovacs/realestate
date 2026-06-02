@@ -91,7 +91,7 @@ export default function StatsStrip() {
         </motion.div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <dl className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -103,41 +103,29 @@ export default function StatsStrip() {
               {/* Double bezel card */}
               <div
                 className="p-[1.5px] rounded-[1.5rem]"
-                style={{
-                  background: "linear-gradient(135deg, rgba(59,114,232,0.2) 0%, rgba(139,94,60,0.15) 100%)",
-                }}
+                style={{ background: "linear-gradient(135deg, rgba(59,114,232,0.2) 0%, rgba(139,94,60,0.15) 100%)" }}
               >
                 <div
                   className="rounded-[calc(1.5rem-1.5px)] p-6 md:p-8 text-center"
-                  style={{
-                    background: "rgba(13,30,56,0.8)",
-                    boxShadow: "inset 0 1px 1px rgba(255,255,255,0.05)",
-                  }}
+                  style={{ background: "rgba(13,30,56,0.8)", boxShadow: "inset 0 1px 1px rgba(255,255,255,0.05)" }}
                 >
-                  <div
+                  <dd
                     className="font-black text-blue-electric mb-2"
-                    style={{
-                      fontFamily: "var(--font-poppins)",
-                      fontSize: "clamp(2.5rem,5vw,5rem)",
-                      lineHeight: 1,
-                      letterSpacing: "-0.04em",
-                    }}
+                    aria-label={`${stat.prefix}${stat.value}${stat.suffix}`}
+                    style={{ fontFamily: "var(--font-poppins)", fontSize: "clamp(2.5rem,5vw,5rem)", lineHeight: 1, letterSpacing: "-0.04em" }}
                   >
-                    <Counter
-                      value={stat.value}
-                      prefix={stat.prefix}
-                      suffix={stat.suffix}
-                      started={inView}
-                    />
-                  </div>
-                  <div className="text-[10px] uppercase tracking-[0.18em] text-off-white/50 font-black">
+                    <span aria-hidden="true">
+                      <Counter value={stat.value} prefix={stat.prefix} suffix={stat.suffix} started={inView} />
+                    </span>
+                  </dd>
+                  <dt className="text-[10px] uppercase tracking-[0.18em] text-off-white/50 font-black">
                     {stat.label}
-                  </div>
+                  </dt>
                 </div>
               </div>
             </motion.div>
           ))}
-        </div>
+        </dl>
 
         {/* Mission Statement */}
         <motion.div

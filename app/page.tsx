@@ -6,12 +6,15 @@ import StatsStrip from "@/components/StatsStrip";
 import ServicesSection from "@/components/ServicesSection";
 import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
+import FeatureBadge from "@/components/FeatureBadge";
+import SkipLink from "@/components/SkipLink";
 
 export default function Home() {
   return (
     <>
+      <SkipLink />
       <Navbar />
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <HeroSection />
         <SearchBar />
         <FeaturedProperties />
@@ -20,6 +23,7 @@ export default function Home() {
         <Testimonials />
       </main>
       <Footer />
+      <FeatureBadge />
     </>
   );
 }
